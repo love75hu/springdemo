@@ -11,4 +11,6 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
     @Transactional(timeout = 10)
     @Query("select c.id from ClientscopeEntity as c")
     List<String> Get();
+
+
 }
