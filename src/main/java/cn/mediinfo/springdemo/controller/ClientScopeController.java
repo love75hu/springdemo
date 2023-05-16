@@ -1,11 +1,11 @@
 package cn.mediinfo.springdemo.controller;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
+import cn.mediinfo.springdemo.response.MsfResponse;
+import cn.mediinfo.springdemo.response.ResponseCodeEnum;
 import cn.mediinfo.springdemo.service.ClientScopeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import kotlin.text.UStringsKt;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +56,13 @@ public class ClientScopeController {
 
     @Operation(summary = "翻页客户端Scope信息")
     @GetMapping("GetPageable")
-    public List<ClientscopeEntity> GetPageable(@Parameter(description = "页码") int Page,@Parameter(description = "每页显示数量") int Size)
+    public MsfResponse<List<ClientscopeEntity>> GetPageable(@Parameter(description = "页码") int Page, @Parameter(description = "每页显示数量") int Size)
     {
-        return  ClientScopeService.GetPageable(Page,Size);
+        if (Page<0)
+        {
+            return MsfResponse.fail(ResponseCodeEnum.CANSHUYC);
+        }
+
+        return MsfResponse.success(ClientScopeService.GetPageable(Page,Size));
     }
 }
