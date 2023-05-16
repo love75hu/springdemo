@@ -50,7 +50,7 @@ public class MsfResponse<T> implements Serializable {
     public static <T> MsfResponse<T> success(T data)
     {
         var response =new MsfResponse<T>();
-        response.setCode(0);
+        response.setCode(ResponseCodeEnum.SUCCESS.getCode());
         response.setData(data);
         return  response;
     }
