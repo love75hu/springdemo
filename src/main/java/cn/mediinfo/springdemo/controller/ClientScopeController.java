@@ -1,5 +1,6 @@
 package cn.mediinfo.springdemo.controller;
 
+import cn.mediinfo.springdemo.exception.CanShuException;
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
 import cn.mediinfo.springdemo.response.MsfResponse;
 import cn.mediinfo.springdemo.response.ResponseCodeEnum;
@@ -43,11 +44,11 @@ public class ClientScopeController {
      */
     @Operation(summary = "根据ID获取客户端Scope信息")
     @GetMapping("GetById")
-    public List<ClientscopeEntity> GetById(@Parameter(description = "ID编号") String Id)
-    {
+    public List<ClientscopeEntity> GetById(@Parameter(description = "ID编号") String Id) throws CanShuException {
         if (Id==null||StringUtils.isWhitespace(Id))
         {
-           throw new RuntimeException("ID不能为空！");
+           // throw new RuntimeException("");
+           throw new CanShuException("ID不能为空！");
         }
 
         return  ClientScopeService.GetById(Id);
@@ -56,7 +57,7 @@ public class ClientScopeController {
 
     @Operation(summary = "翻页客户端Scope信息")
     @GetMapping("GetPageable")
-    public MsfResponse<List<ClientscopeEntity>> GetPageable(@Parameter(description = "页码") int Page, @Parameter(description = "每页显示数量") int Size)
+    public MsfResponse<List<ClientscopeEntity>> GetPageable(@Parameter(description = "页码",required = false) int Page, @Parameter(description = "每页显示数量",required = true) int Size)
     {
         if (Page<0)
         {

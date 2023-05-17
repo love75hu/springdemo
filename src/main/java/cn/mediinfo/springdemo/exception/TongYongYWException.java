@@ -1,8 +1,10 @@
 package cn.mediinfo.springdemo.exception;
 
+import cn.mediinfo.springdemo.response.ResponseCodeEnum;
+
 public class TongYongYWException extends MsfException {
-    private static String Code;
-    public void setCode(String name) {
+    private static ResponseCodeEnum Code;
+    public void setCode(ResponseCodeEnum name) {
         this.Code = name;
     }
 
@@ -12,5 +14,10 @@ public class TongYongYWException extends MsfException {
 
     public TongYongYWException(String message, Exception exception) {
         super(message, exception);
+    }
+
+    @Override
+    public ResponseCodeEnum getCode() {
+        return Code;
     }
 }

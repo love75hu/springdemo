@@ -1,5 +1,7 @@
 package cn.mediinfo.springdemo.response;
 
+import org.springframework.http.HttpStatusCode;
+
 import java.io.Serializable;
 
 public class MsfResponse<T> implements Serializable {
@@ -59,6 +61,14 @@ public class MsfResponse<T> implements Serializable {
         MsfResponse api = new MsfResponse();
         api.setCode(code.getCode());
         api.setMessage(code.getMessage());
+        api.setException(exception);
+        return api;
+    }
+
+    public static MsfResponse fail(ResponseCodeEnum code, String message,Object exception) {
+        MsfResponse api = new MsfResponse();
+        api.setCode(code.getCode());
+        api.setMessage(message);
         api.setException(exception);
         return api;
     }
