@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping("api/v1/Member")
-@EnableConfigurationProperties(value = {MemberProperties.class})
+//@EnableConfigurationProperties(value = {MemberProperties.class})
 public class MemberController {
 
 
@@ -24,7 +24,7 @@ public class MemberController {
      * 获取memberProperties配置参数
      * @return
      */
-    @Operation(summary = "获取javaStack配置参数")
+    @Operation(summary = "获取member构造器绑定配置参数")
     @GetMapping("get")
     public MemberProperties Get() {
         return memberProperties;

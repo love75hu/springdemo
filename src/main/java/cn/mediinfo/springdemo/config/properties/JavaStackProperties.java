@@ -1,6 +1,7 @@
 package cn.mediinfo.springdemo.config.properties;
 
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 @Data
 @ConfigurationProperties(prefix = "javastack")
 public class JavaStackProperties {
+    @NotNull
     private String name;
     private List<String> user;
     private Map<String, String> params;
