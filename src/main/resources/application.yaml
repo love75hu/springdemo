@@ -1,8 +1,15 @@
 server:
+  #统一前缀
+  servlet:
+    context-path: /mediinfo-springdemo
   port: 8000
   #1、 一定不要使用kill -9 操作，使用kill -2 来关闭容器。这样才会触发java内部ShutdownHook操作，kill -9不会触发ShutdownHook。
   #2、可以使用端点监控 POST 请求 /actuator/shutdown 来执行优雅关机。
   shutdown: graceful #开启优雅停机
+#swagger doc link: https://springdoc.org/index.html#properties
+springdoc:
+  swagger-ui:
+    enabled: true
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
