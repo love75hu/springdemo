@@ -17,11 +17,27 @@ javastack:
   security:
     key: clientxxxxx
     code: passwordxxxxx
-
+member:
+  name: tom
+  sex: 1
+  age: 32
+  birthday: 2000-12-12 12:44:55
 #swagger doc link: https://springdoc.org/index.html#properties
 springdoc:
+  openapi:
+    Info:
+      title: 文档标题
+      description: swagger描述信息
+      version: 1.0.0
+      license:
+        name: Apache 2.0
+        url: http://springdoc.org
+    externalDocs:
+      description: SpringShop Wiki Documentation
+      url: https://springshop.wiki.github.org/docs
   swagger-ui:
     enabled: true
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
