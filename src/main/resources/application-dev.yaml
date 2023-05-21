@@ -7,7 +7,7 @@ server:
   #2、可以使用端点监控 POST 请求 /actuator/shutdown 来执行优雅关机。
   shutdown: graceful #开启优雅停机
 javastack:
-  name: java参数绑定实例
+  name: dev-java参数绑定实例
   user:
     - tansir
     - zhangsan
@@ -39,10 +39,6 @@ springdoc:
     enabled: true
 
 spring:
-  profiles:
-    default: dev
-    active: dev1,test
-    #include: dev，test
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://172.19.125.100:3306/demo
@@ -62,25 +58,3 @@ spring:
       org.springframework: debug
       org.hibernate.type.descriptor.sql.BasicBinder: trace
       org.hibernate.type.descriptor.sql.BasicExtractor: trace
----
-spring:
-  config:
-    activate:
-      on-profile: dev1
----
-spring:
-  config:
-    activate:
-      on-profile: dev2
----
-spring:
-  profiles:
-    #default: dev
-    active: dev,pro #//可以通过命令行参数替换，默认是所有
-    include: #//不会被替换，默认是空
-        #- dev
-        #- main
-    group:
-      dev:
-        - dev1
-        - dev2
