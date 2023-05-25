@@ -6,6 +6,10 @@ server:
   #1、 一定不要使用kill -9 操作，使用kill -2 来关闭容器。这样才会触发java内部ShutdownHook操作，kill -9不会触发ShutdownHook。
   #2、可以使用端点监控 POST 请求 /actuator/shutdown 来执行优雅关机。
   shutdown: graceful #开启优雅停机
+java:
+  starter:
+    message: 第一个自定义starter
+    enabled: true
 javastack:
   name: java参数绑定实例
   user:
@@ -39,21 +43,26 @@ springdoc:
     enabled: true
 
 spring:
+
+  #激活的profile
   profiles:
     default: dev
     active: dev1,test
     #include: dev，test
+  #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://172.19.125.100:3306/demo
     username: root
     password: admin123
+  #jpa配置
   jpa:
     properties:
       hibernate:
         #根据类型可以生成特定的sql,https://docs.jboss.org/hibernate/orm/6.1/javadocs/org/hibernate/dialect/package-summary.html
         dialect: org.hibernate.dialect.MySQL8Dialect
         show-sql: true
+  #日志
   logging:
     level:
       root: debug
@@ -62,6 +71,8 @@ spring:
       org.springframework: debug
       org.hibernate.type.descriptor.sql.BasicBinder: trace
       org.hibernate.type.descriptor.sql.BasicExtractor: trace
+
+#多文档示例
 ---
 spring:
   config:
