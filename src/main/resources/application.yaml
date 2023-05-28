@@ -43,7 +43,6 @@ springdoc:
     enabled: true
 
 spring:
-
   #激活的profile
   profiles:
     default: dev

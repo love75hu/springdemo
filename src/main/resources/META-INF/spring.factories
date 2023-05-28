@@ -1,0 +1,4 @@
+
+#????????????
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+ cn.mediinfo.springd.emo.diagnostics.analyzer.PortInUseFailureAnalyzer
