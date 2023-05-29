@@ -64,6 +64,7 @@ spring:
   #日志
   logging:
     level:
+      sql: debug
       root: debug
       #打印sql参数
       org.hibernate.SQL: debug
