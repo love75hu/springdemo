@@ -47,6 +47,8 @@ springdoc:
     enabled: true
 
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   #激活的profile
   profiles:
     default: dev
