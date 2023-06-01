@@ -1,6 +1,6 @@
 package cn.mediinfo.springdemo.controller;
 
-import cn.mediinfo.springdemo.config.properties.JavaStackProperties;
+import cn.mediinfo.springdemo.context.properties.JavaStackProperties;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package cn.mediinfo.springdemo.config.properties;
+package cn.mediinfo.springdemo.context.properties;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

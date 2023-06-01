@@ -1,7 +1,6 @@
-package cn.mediinfo.springdemo.config.properties;
+package cn.mediinfo.springdemo.context.properties;
 
 import lombok.Data;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Profile;
 
