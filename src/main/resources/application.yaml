@@ -77,6 +77,12 @@ spring:
       org.springframework: debug
       org.hibernate.type.descriptor.sql.BasicBinder: trace
       org.hibernate.type.descriptor.sql.BasicExtractor: trace
+  #thymeleaf模版引擎配置
+  thymeleaf:
+    enabled: true
+    cache: true
+    prefix: classpath:/templates/
+    suffix: .html
 
 #多文档示例
 ---
