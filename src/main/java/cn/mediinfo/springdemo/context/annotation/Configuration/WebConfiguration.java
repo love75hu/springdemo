@@ -3,10 +3,7 @@ package cn.mediinfo.springdemo.context.annotation.Configuration;
 import cn.mediinfo.springdemo.context.interceptor.LoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * 自定义web配置类
@@ -18,6 +15,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfiguration implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
+
+    /**
+     * 服务跨域支持
+     * @param registry
+     */
+    @Override
+    public  void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods("Get","Post","Put","Delete")
+                .allowedOrigins("*")
+                .allowCredentials(true).maxAge(3600);
+    }
 
     /**
      * 添加拦截器

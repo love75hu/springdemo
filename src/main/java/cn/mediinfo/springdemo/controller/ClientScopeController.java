@@ -24,6 +24,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping({"api/v2/ClientScope", "api/v1/ClientScope"})
 @Validated //参数约束注解
+@CrossOrigin
 public class ClientScopeController {
 
     @Autowired

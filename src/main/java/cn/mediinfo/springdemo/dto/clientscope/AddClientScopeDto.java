@@ -11,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 
 @Data
 @NoArgsConstructor(force = true) //自动生成无参造函数
-@Validated
 public class AddClientScopeDto {
 
     /**
