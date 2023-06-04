@@ -47,6 +47,14 @@ springdoc:
     enabled: true
 
 spring:
+  data:
+    redis: #redis
+      host: 192.168.50.93
+      port: 31505
+      database: 0
+      password: 123456
+  session: #session 会话
+    timeout: 30s #默认30分钟
   lifecycle:
     timeout-per-shutdown-phase: 30s
   #激活的profile

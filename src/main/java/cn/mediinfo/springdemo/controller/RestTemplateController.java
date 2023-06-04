@@ -22,9 +22,9 @@ public class RestTemplateController {
      * 获取一个远程页面
      * @return
      */
-    @Operation(summary = "获取kelink.com页面内容")
+    @Operation(summary = "使用restTemplate获取kelink.com页面内容")
     @GetMapping
-    public MsfResponse<String> Get(String Path) {
+    public MsfResponse<String> Get() {
         // 发送 GET 请求
         String url = "http://kelink.com";
         var response = restTemplate.getForEntity(url,String.class);
