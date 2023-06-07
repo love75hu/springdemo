@@ -155,6 +155,14 @@ spring:
     cache: true
     prefix: classpath:/templates/
     suffix: .html
+  sql:
+    init:
+      mode: always #数据库初始化模式 EMBEEDED（默认，只对嵌入式数据库执行初始化） 外部数据库初始化改为 always
+      continue-on-error: true #初始化错误是否继续启动
+      #schema-locations:
+      #  - classpath:init.sql #需要执行初始化的DDL脚本（建表）
+      data-locations:
+      - classpath:Sql/insert.sql #需要执行初始化的DML脚本（插入数据）
 
 #多文档示例
 ---

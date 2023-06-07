@@ -1,0 +1,1 @@
+insert into clientscope values ('3a0ba6fa-fd8e-5784-8888-8888','init','3a0ba6d6-3e2f-6b64-4b97-81e5065d5cf1')
