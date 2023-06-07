@@ -64,10 +64,74 @@ spring:
     #include: dev，test
   #数据库配置
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver #可以不用指定，主流数据库都可以进行自动推断
+    type: com.alibaba.druid.pool.DruidDataSource #手动指定连接池
     url: jdbc:mysql://172.19.125.100:3306/demo
     username: root
     password: admin123
+    druid:
+      initial-size: 5 #初始化连接池大小
+      min-idle: 5 #连接池最小空闲数
+      max-active: 20 #连接池最大连接数
+      max-wait: 60000 #连接时最大等待时间（单位：毫秒）
+      time-between-eviction-runs-millis: 60000 #检测关闭空闲连接的时间间隔（单位：毫秒）
+      min-evictable-idle-time-millis: 300000 #保持空闲连接不被关闭的最小生存时间（单位：毫秒）
+      validationQuery: SELECT 1 FROM DUAL
+      validation-query-timeout: 1 # 检测连接是否有效的超时时间
+      test-while-idle: true #检测空闲连接 #不影响性能，建议开启
+      test-on-borrow: false # 检测获取连接时的有效性 # 开启后会影响性能
+      spring.datasource.druid.test-on-return: false  # 检测归还连接时的有效性 # 开启后会影响性能
+      pool-prepared-statements: false  # 是否开启PSCache，即是否缓存preparedStatement（提升写入、查询效率）# 建议在支持游标的数据库开启，例如：Oracle
+      max-pool-prepared-statement-per-connection-size: -1 # 每个连接上PSCache的最大值  # 如果大于0，pool-prepared-statements自动开启
+      stat-view-servlet: #配置监控页功能
+        enabled: true # 配置统计页面
+        reset-enable: false  #禁用HTML页面上的“重置”功能，会把所有监控的数据全部清空，一般不使用
+        allow:  # 访问白名单
+        deny: #黑名单
+        login-username: admin # 访问用户名
+        login-password: 123456  # 访问密码
+        url-pattern: /druid/*  #配置DruidStatViewServlet的访问地址。后台监控页面的访问地址
+      web-stat-filter: #监控web
+        enabled: true # 配置统计页面过滤
+        url-pattern: /* # 过滤路径 #监控所有
+        exclusions: .js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/* #排除路径
+        session-stat-enable: true # 开启session统计
+        session-stat-max-count: 100 # session统计的最大个数
+        principal-session-name: session_name
+        principal-cookie-name: cookie_name
+      aop-patterns: cn.mediinfo.* #Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
+      # 配置默认的监控统计拦截的Filter
+      # 不配置则监控页面中的SQL无法统计
+      # stat - SQL监控配置
+      # wall - SQL防火墙配置
+      # slf4j - Druid日志配置
+      filters: stat,wall,slf4j
+      # 配置过滤器
+      # SQL监控配置
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          log-slow-sql: true #是否开启慢SQL统计
+          slow-sql-millis: 3000 # 慢SQL时间
+          slow-sql-log-level: ERROR # 慢SQL日志级别
+          merge-sql: true # 是否开启合并SQL
+        wall:
+          enabled: true # SQL防火墙配置
+          config:
+            insert-allow: true # 允许新增
+            update-allow: true # 允许更新
+            update-where-none-check: true # 禁止更新时无条件
+            delete-allow: true # 允许删除
+            delete-where-none-check: true # 禁止删除时无条件
+            alter-table-allow: false # 禁止对表ALTER
+            drop-table-allow: false # 禁止对表DROP
+        slf4j:
+          enabled: true # Druid日志配置
+          data-source-log-enabled: false # 关闭数据源日志
+          connection-log-enabled: false # 关闭连接日志
+          statement-executable-sql-log-enable: true # 开启执行SQL日志
+          result-set-log-enabled: true # 开启结果映射日志
   #jpa配置
   jpa:
     properties:
