@@ -2,6 +2,7 @@ package cn.mediinfo.springdemo.controller;
 
 import cn.mediinfo.springdemo.context.properties.JavaStackProperties;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("api/v1/javaStack")
 @EnableConfigurationProperties(value = {JavaStackProperties.class})
+@RequiredArgsConstructor
 public class JavaStackController {
 
-    @Autowired
-    private JavaStackProperties javaStackProperties;
+    private final JavaStackProperties javaStackProperties;
+
 
     /**
      * 获取javaStack配置参数

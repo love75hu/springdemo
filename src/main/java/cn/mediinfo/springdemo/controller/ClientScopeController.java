@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -25,10 +26,10 @@ import java.util.List;
 @RequestMapping({"api/v2/ClientScope", "api/v1/ClientScope"})
 @Validated //参数约束注解
 @CrossOrigin
+@RequiredArgsConstructor
 public class ClientScopeController {
 
-    @Autowired
-    private ClientScopeService ClientScopeService;
+    private final ClientScopeService ClientScopeService;
 
     /**
      * 获取手术通知信息
