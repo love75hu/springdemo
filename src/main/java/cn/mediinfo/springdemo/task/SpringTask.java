@@ -15,6 +15,6 @@ public class SpringTask {
     @Async //开启任务异步执行
     @Scheduled(cron = "*/3 * * * * *")
     public void printTask() {
-        log.info("任务计划执行啦！");
+        log.info("SpringTask任务计划执行啦！");
     }
 }
