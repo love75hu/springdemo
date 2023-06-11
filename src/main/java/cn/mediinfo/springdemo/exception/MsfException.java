@@ -2,8 +2,6 @@ package cn.mediinfo.springdemo.exception;
 
 import cn.mediinfo.springdemo.response.ResponseCodeEnum;
 
-import java.util.Enumeration;
-
 /**
  * 自定义异常基类
  */

@@ -56,6 +56,19 @@ mybatis:
     #map-underscore-to-camel-case: true #使用驼峰命名法转换字段
     log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl #指定 MyBatis 所用日志的具体实现
 spring:
+  task:
+    #任务调度线程池
+    scheduling:
+      pool:
+        size: 3 #线程数，默认1
+    #任务执行线程池参数配置
+    execution:
+      pool:
+        queue-capacity: 9999999 #队列大小，默认是Integer最大值
+        core-size: 8 #核心线程数，默认8
+        max-size: 9999999 #最大线程数，默认是Integer最大值
+        allow-core-thread-timeout: true #是否允许核心线程超时，默认true
+        keep-alive: 60s #线程保活时间，默认60s
   jdbc: #自定义jdbc
     template:
       fetch-size: -1
@@ -63,10 +76,10 @@ spring:
       query-timeout: 30s
   data:
     redis: #redis
+      password: 123456
+      database: 0
       host: 192.168.50.93
       port: 31505
-      database: 0
-      password: 123456
   session: #session 会话
     timeout: 30s #默认30分钟
   lifecycle:

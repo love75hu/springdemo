@@ -1,17 +1,12 @@
 package cn.mediinfo.springdemo.context.interceptor;
 
-import cn.mediinfo.springdemo.exception.CanShuException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.annotations.Comment;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import java.util.logging.Logger;
 
 /**
  * 登录拦截器示例

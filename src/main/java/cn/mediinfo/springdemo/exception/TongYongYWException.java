@@ -5,7 +5,7 @@ import cn.mediinfo.springdemo.response.ResponseCodeEnum;
 public class TongYongYWException extends MsfException {
     private static ResponseCodeEnum Code;
     public void setCode(ResponseCodeEnum name) {
-        this.Code = name;
+        Code = name;
     }
 
     public TongYongYWException(String message) {

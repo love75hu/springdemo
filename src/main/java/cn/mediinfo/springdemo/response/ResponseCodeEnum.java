@@ -17,8 +17,8 @@ public enum ResponseCodeEnum {
     CANSHUYC(-60, "CANSHUYC！"),
     WEIZHAODSJYC(-61, "WEIZHAODSJYC！");
 
-    private Integer code;
-    private String message;
+    private final Integer code;
+    private final String message;
 
     ResponseCodeEnum(Integer code, String message) {
         this.code = code;

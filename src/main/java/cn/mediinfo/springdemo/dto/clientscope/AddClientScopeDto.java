@@ -5,9 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.tool.Message;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.validation.annotation.Validated;
 
 @Data
 @NoArgsConstructor(force = true) //自动生成无参造函数

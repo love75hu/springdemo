@@ -1,7 +1,5 @@
 package cn.mediinfo.springdemo.response;
 
-import org.springframework.http.HttpStatusCode;
-
 import java.io.Serializable;
 
 public class MsfResponse<T> implements Serializable {
