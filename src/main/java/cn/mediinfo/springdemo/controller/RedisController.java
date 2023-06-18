@@ -11,6 +11,9 @@ import org.springframework.data.redis.core.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 使用redis模版操作缓存
+ */
 @RestController
 @Slf4j
 @RequestMapping("api/v1/Redis")

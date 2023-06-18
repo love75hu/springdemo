@@ -13,7 +13,7 @@ javastack:
     - zhangsan
   params:
     tel: 17600159370
-    address: 杭州余杭区
+    address: 杭州余杭区-1
   security:
     key: ${random.uuid}
     code: ${random.long(0,100)}

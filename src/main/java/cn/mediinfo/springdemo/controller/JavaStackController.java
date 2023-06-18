@@ -26,6 +26,7 @@ public class JavaStackController {
     @Operation(summary = "获取javaStack配置参数")
     @GetMapping("get")
     public JavaStackProperties Get() {
+
         return javaStackProperties;
     }
 }

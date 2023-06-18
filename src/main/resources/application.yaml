@@ -55,7 +55,21 @@ mybatis:
     default-executor-type: simple #配置默认的执行器.SIMPLE就是普通执行器;REUSE执行器会重用预处理语句(prepared statements);BATCH执行器将重用语句并执行批量更新
     #map-underscore-to-camel-case: true #使用驼峰命名法转换字段
     log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl #指定 MyBatis 所用日志的具体实现
+#actuator 监控
+management:
+  endpoint:
+    shutdown:
+      enabled: true #启用endpoint
+  endpoints:
+    web: #通过web方式暴露所有端点
+      discovery:
+        enabled: true #// 开关/actuator路径下的端点发现
+      exposure:
+        include: "*"
+      base-path: /actuator2 #//定义新的默认路径
 spring:
+  cache:
+    type: redis #指定需要使用的缓存组件
   task:
     #任务调度线程池
     scheduling:
@@ -88,7 +102,7 @@ spring:
   #激活的profile
   profiles:
     default: dev
-    active: dev1,test
+    active: dev1
     #include: dev，test
   #数据库配置
   datasource:

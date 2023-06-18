@@ -11,7 +11,7 @@ import java.util.Map;
  * java参数绑定示例
  */
 @Data
-@Profile("dev") //表示只有在dev环境才会被激活
+//@Profile("dev") //表示只有在dev环境才会被激活
 @ConfigurationProperties(prefix = "javastack")
 public class JavaStackProperties {
     //@NotNull

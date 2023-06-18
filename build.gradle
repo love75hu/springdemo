@@ -58,6 +58,12 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-quartz:3.1.0'
 
+    implementation 'org.springframework.boot:spring-boot-starter-cache:3.1.0'
+
+    runtimeOnly  'org.springframework.boot:spring-boot-devtools:3.1.0' //开发工具
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.0'//应用监控
+
 }
 
 tasks.named('test') {
