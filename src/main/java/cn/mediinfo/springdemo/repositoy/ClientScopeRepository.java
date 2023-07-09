@@ -1,15 +1,18 @@
 package cn.mediinfo.springdemo.repositoy;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
+import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,String> {
     @Transactional(timeout = 10)
@@ -56,4 +59,23 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
      */
     Slice<ClientscopeEntity> findByidAndClientid(String id,Pageable pageable, Sort sort);
 
+    /**
+     * 获取一个对象
+     * 根据ID查询，且根据ID倒序
+     * @Nonnull 要求参数和返回值不能为空
+     * @param id must not be {@literal null}.
+     * @return
+     */
+    @Nonnull
+    ClientscopeEntity findTopByIdOrderByIdDesc(String id);
+
+    /**
+     * 获取一个对象
+     * 根据ID查询，且根据ID倒序
+     * @Nullable 参数和返回值允许为null
+     * @param id
+     * @return
+     */
+    @Nullable
+    ClientscopeEntity findTopByIdOrderByIdAsc(String id);
 }
