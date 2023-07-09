@@ -1,3 +1,4 @@
+
 package cn.mediinfo.springdemo.repositoy;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.NonNullApi;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,4 +80,14 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
      */
     @Nullable
     ClientscopeEntity findTopByIdOrderByIdAsc(String id);
+
+    /**
+     * 获取一个对象
+     * 根据ID查询，且根据Clientid正序,参数不能为null，返回值可以为Null
+     * @Nonnull 要求参数和返回值不能为空，但是Optional<T>声明返回值可以为null
+     * @param id
+     * @return
+     */
+    @Nonnull
+   Optional<ClientscopeEntity> findTopByIdOrderByClientidAsc(String id);
 }
