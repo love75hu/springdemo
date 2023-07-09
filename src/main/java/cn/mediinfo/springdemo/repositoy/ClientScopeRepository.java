@@ -41,6 +41,14 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
     Page<ClientscopeEntity> findFirst5Byid(String id,Pageable pageable);
 
     /**
+     * 根据ID分页查询，且去重后只返回前5条
+     * @param id
+     * @param pageable
+     * @return 返回一个带分页结果的page,带count（会执行一条count的SQL语句），性能低
+     */
+    Page<ClientscopeEntity> findDistinctFirst5Byid(String id,Pageable pageable);
+
+    /**
      * 根据ID和Clientid分页查询,且带排序
      * @param id
      * @param pageable
