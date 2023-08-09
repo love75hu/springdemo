@@ -4,7 +4,6 @@ import cn.mediinfo.springdemo.task.QuartzTask;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
@@ -47,7 +46,7 @@ public class QuartzTaskDyamicConfiguration {
      * @return
      */
     public Trigger quartzTaskForTriggerBean() {
-        var cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/3 * * * * ? ");
+        var cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/30 * * * * ? ");
         return TriggerBuilder.newTrigger()
                 .forJob(quartzTaskForJobDetailBean())
                 .withSchedule(cronScheduleBuilder)

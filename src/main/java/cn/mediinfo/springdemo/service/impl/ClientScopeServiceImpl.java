@@ -23,7 +23,7 @@ public class ClientScopeServiceImpl implements ClientScopeService {
     public List<String> Get() {
         var list =new ArrayList<String>();
         list.add("陈芳杰");
-        list.addAll(clientScopeRepository.Get());
+        list.addAll(clientScopeRepository.findAllById("1"));
 
         return list.stream().filter(x->!x.startsWith("陈")).toList();
         //return list;

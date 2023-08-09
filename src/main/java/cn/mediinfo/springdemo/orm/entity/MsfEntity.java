@@ -1,9 +1,11 @@
 package cn.mediinfo.springdemo.orm.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.MappedSuperclass;
 
 import java.util.Date;
 
+@MappedSuperclass
 public abstract class MsfEntity<T> implements IdEntity<T>, ModifyRecord, SoftDelete {
     private int zuoFeiBZ;
 

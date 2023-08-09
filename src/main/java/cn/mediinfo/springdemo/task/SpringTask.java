@@ -13,7 +13,7 @@ public class SpringTask {
      * 任务计划
      */
     @Async //开启任务异步执行
-    @Scheduled(cron = "*/3 * * * * *")
+    @Scheduled(cron = "*/50 * * * * *")
     public void printTask() {
         log.info("SpringTask任务计划执行啦！");
     }

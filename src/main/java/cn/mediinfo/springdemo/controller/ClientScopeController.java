@@ -1,5 +1,6 @@
 package cn.mediinfo.springdemo.controller;
 
+import cn.mediinfo.springdemo.context.datasource.DynamicDataSource;
 import cn.mediinfo.springdemo.dto.clientscope.AddClientScopeDto;
 import cn.mediinfo.springdemo.exception.CanShuException;
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
@@ -62,6 +63,7 @@ public class ClientScopeController {
 
     @Operation(summary = "翻页客户端Scope信息")
     @GetMapping("GetPageable")
+    @DynamicDataSource
     public MsfResponse<List<ClientscopeEntity>> GetPageable(@Parameter(description = "页码", required = false) int Page, @Parameter(description = "每页显示数量", required = true) int Size) {
         if (Page < 0) {
             return MsfResponse.fail(ResponseCodeEnum.CANSHUYC);

@@ -2,24 +2,28 @@
 package cn.mediinfo.springdemo.repositoy;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
+import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.lang.NonNullApi;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+
 public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,String> {
+    /**
+     * JPQL语法查询
+     * @param id
+     * @return
+     */
     @Transactional(timeout = 10)
-    @Query("select c.id from ClientscopeEntity as c")
-    List<String> Get();
+    @Query(value = "select c.id from ClientscopeEntity as c where c.id = :id",nativeQuery = false)
+    List<String> findAllById(@Param("id")String id);
 
     /**
      * 根据ID分页查询
@@ -59,7 +63,7 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
      * @param pageable
      * @return 返回一个带分页结果的Slice,只知道下一个Slice是否不可以，不带count，性能高
      */
-    Slice<ClientscopeEntity> findByidAndClientid(String id,Pageable pageable, Sort sort);
+    //Slice<ClientscopeEntity> findByidAndClientid(String id,Pageable pageable, Sort sort);
 
     /**
      * 获取一个对象

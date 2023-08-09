@@ -2,7 +2,7 @@ server:
   #统一前缀
   servlet:
     context-path: /mediinfo-springdemo
-  port: 8000
+    port: 8000
   ssl:
     protocol: TLS
     key-store: classpath:keystore.p12
@@ -68,6 +68,11 @@ management:
         include: "*"
       base-path: /actuator2 #//定义新的默认路径
 spring:
+  #设置安全验证用户的名称、密码和角色
+  security:
+    user:
+      name: root
+      password: admin
   cache:
     type: redis #指定需要使用的缓存组件
   task:
@@ -108,6 +113,20 @@ spring:
     default: dev
     active: dev1
     #include: dev，test
+  #多数据源自定义master
+  master:
+    driver-class-name: com.mysql.cj.jdbc.Driver #可以不用指定，主流数据库都可以进行自动推断
+    type: com.alibaba.druid.pool.DruidDataSource #手动指定连接池
+    url: jdbc:mysql://172.19.125.100:3306/sys
+    username: root
+    password: admin123
+  #多数据源自定义slave
+  slave:
+    driver-class-name: com.mysql.cj.jdbc.Driver #可以不用指定，主流数据库都可以进行自动推断
+    type: com.alibaba.druid.pool.DruidDataSource #手动指定连接池
+    url: jdbc:mysql://172.19.125.100:3306/demo
+    username: root
+    password: admin123
   #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver #可以不用指定，主流数据库都可以进行自动推断
@@ -263,8 +282,10 @@ spring:
       continue-on-error: true #初始化错误是否继续启动
       #schema-locations:
       #  - classpath:init.sql #需要执行初始化的DDL脚本（建表）
-      data-locations:
-      - classpath:Sql/insert.sql #需要执行初始化的DML脚本（插入数据）
+      schema-locations:
+        #- classpath:Sql/users.ddl  #spring security 初始化ddl  ####多数据源后初始化SQL策略似乎产生了和预期不一致的行为，先屏蔽####
+      #data-locations:
+      #- classpath:Sql/insert.sql #需要执行初始化的DML脚本（插入数据）
   quartz:
     auto-startup: true #是否自动启动 Quartz，true 或 false，默认值为 true
     startup-delay: 0s #//启动延迟，默认9s

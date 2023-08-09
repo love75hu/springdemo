@@ -32,7 +32,7 @@ public class QuartzTaskConfiguration {
      */
     @Bean
     public Trigger quartzTaskForTriggerBean() {
-        var cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/3 * * * * ? ");
+        var cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/50 * * * * ? ");
         return TriggerBuilder.newTrigger()
                 .forJob(quartzTaskForJobDetailBean())
                 .withSchedule(cronScheduleBuilder)

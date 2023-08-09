@@ -1,12 +1,10 @@
 package cn.mediinfo.springdemo.orm.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+@MappedSuperclass
 public abstract class StringMsfEntity extends MsfEntity<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

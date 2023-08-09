@@ -51,7 +51,7 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    runtimeOnly 'com.alibaba:druid-spring-boot-starter:1.2.8' //阿里巴巴开源连接池durid
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.8' //阿里巴巴开源连接池durid
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
@@ -64,6 +64,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator:3.1.0'//应用监控
 
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.1.0'
+
+    implementation 'com.github.penggle:kaptcha:2.3.2' //验证码
 }
 
 tasks.named('test') {
