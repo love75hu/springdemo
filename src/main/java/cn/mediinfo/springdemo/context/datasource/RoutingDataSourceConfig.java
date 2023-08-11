@@ -1,6 +1,7 @@
 package cn.mediinfo.springdemo.context.datasource;
 
 import cn.mediinfo.springdemo.orm.entity.MsfEntity;
+import cn.mediinfo.springdemo.orm.repositorie.SoftDeleteRepositoryImpl;
 import com.google.common.collect.Maps;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ import java.util.Map;
 
 // 利⽤ EnableJpaRepositories 配置哪些包下⾯的 Repositories，采⽤哪个 EntityManagerFactory 和哪个 TransactionManagement
 @EnableJpaRepositories(
-        basePackages = "cn.mediinfo.springdemo.repositoy", //数据源的 repository 的包路径
+        repositoryBaseClass = SoftDeleteRepositoryImpl.class,
+        basePackages = "cn.mediinfo.springdemo", //数据源的 repository 的包路径
         transactionManagerRef = "routingTransactionManager", //改变数据源的 EntityManagerFactory 的默认值，改为 routingTransactionManager
         entityManagerFactoryRef = "routingEntityManagerFactory") //改变数据源的 TransactionManagement 的默认值，routingEntityManagerFactory
 public class RoutingDataSourceConfig {

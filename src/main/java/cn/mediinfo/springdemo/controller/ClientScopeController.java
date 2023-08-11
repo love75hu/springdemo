@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
@@ -63,7 +64,6 @@ public class ClientScopeController {
 
     @Operation(summary = "翻页客户端Scope信息")
     @GetMapping("GetPageable")
-    @DynamicDataSource
     public MsfResponse<List<ClientscopeEntity>> GetPageable(@Parameter(description = "页码", required = false) int Page, @Parameter(description = "每页显示数量", required = true) int Size) {
         if (Page < 0) {
             return MsfResponse.fail(ResponseCodeEnum.CANSHUYC);
@@ -102,6 +102,13 @@ public class ClientScopeController {
                            @RequestParam @Parameter(description = "clientId") @NotNull @Size(min = 1, max = 64) String clientId) {
 
 
+        return MsfResponse.success();
+    }
+
+    @Operation(summary = "删除ClientScope")
+    @DeleteMapping("{Id}")
+    public MsfResponse Delete(@Parameter(description = "ID编号") @PathVariable("Id") String Id) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        ClientScopeService.Delete(Id);
         return MsfResponse.success();
     }
 }

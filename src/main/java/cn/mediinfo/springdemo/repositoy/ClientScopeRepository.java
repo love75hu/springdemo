@@ -2,11 +2,13 @@
 package cn.mediinfo.springdemo.repositoy;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
+import cn.mediinfo.springdemo.orm.repositorie.SoftDeleteRepository;
 import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,String> {
+public interface ClientScopeRepository extends SoftDeleteRepository<ClientscopeEntity,String> {
     /**
      * JPQL语法查询
      * @param id
@@ -25,13 +27,8 @@ public interface ClientScopeRepository extends JpaRepository<ClientscopeEntity,S
     @Query(value = "select c.id from ClientscopeEntity as c where c.id = :id",nativeQuery = false)
     List<String> findAllById(@Param("id")String id);
 
-    /**
-     * 根据ID分页查询
-     * @param id
-     * @param pageable
-     * @return 返回一个带分页结果的page,带count（会执行一条count的SQL语句），性能低
-     */
-    Page<ClientscopeEntity> findByid(String id,Pageable pageable);
+    Optional<ClientscopeEntity> findById(String id);
+
 
     /**
      * 根据ID分页查询，且只返回第一条
