@@ -1,9 +1,15 @@
 package cn.mediinfo.springdemo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+@Builder //是 Lombok 库中的一个注解，用于简化 Java 类的构建过程。通过在类上添加 @Builder 注解，可以自动生成一个内部静态类 Builder，用于链式调用和构建对象。
+@AllArgsConstructor //带参构造函数
+@NoArgsConstructor  //无参构造函数
 @Entity
 @Table(name = "clientscope", schema = "demo", catalog = "")
 public class ClientscopeEntity {

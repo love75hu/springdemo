@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +55,13 @@ public class ClientScopeServiceImpl implements ClientScopeService {
     public void Delete(String Id) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         var entity=clientScopeRepository.findById(Id);
         clientScopeRepository.softDelete(entity.get());
+    }
+
+    @Override
+    public <S extends ClientscopeEntity> Optional<ClientscopeEntity> findOneByExample(ClientscopeEntity example, Class<S> EntityClass) {
+
+        ClientscopeEntity buildEntity=ClientscopeEntity.builder().id("1").build();
+        var entity=clientScopeRepository.findOneByExample(buildEntity,ClientscopeEntity.class);
+        return entity;
     }
 }
