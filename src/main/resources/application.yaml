@@ -23,7 +23,7 @@ javastack:
     tel: 17600159370
     address: 杭州余杭区
   security:
-    key: ${random.uuid}
+    key: ${random.uuid} #spel语法实现
     code: ${random.long(0,100)}
 member:
   name: tom
@@ -201,6 +201,8 @@ spring:
   jpa:
     properties:
       hibernate:
+        #指定获取连接和释放连接的模式，hibernate5.2之后新增的配置项
+        connection.handling_mode: DELAYED_ACQUISITION_AND_HOLD
         #根据类型可以生成特定的sql,https://docs.jboss.org/hibernate/orm/6.1/javadocs/org/hibernate/dialect/package-summary.html
         dialect: org.hibernate.dialect.MySQL8Dialect
         #hbm2ddl策略有validate、update、create、create-drop、none

@@ -4,6 +4,7 @@ import cn.mediinfo.springdemo.context.datasource.DynamicDataSource;
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
 import cn.mediinfo.springdemo.repositoy.ClientScopeRepository;
 import cn.mediinfo.springdemo.service.ClientScopeService;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
@@ -21,13 +22,14 @@ import java.util.List;
 public class ClientScopeServiceImpl implements ClientScopeService {
 
     private final ClientScopeRepository clientScopeRepository;
+    private final EntityManager entityManager;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<String> Get() {
         var list =new ArrayList<String>();
         list.add("陈芳杰");
         list.addAll(clientScopeRepository.findAllById("1"));
-
+        
         return list.stream().filter(x->!x.startsWith("陈")).toList();
         //return list;
     }
