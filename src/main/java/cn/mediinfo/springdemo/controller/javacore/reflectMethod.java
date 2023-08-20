@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  */
 public class reflectMethod {
     public reflectMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        //方法名 square， 参数 double.class)
+        //方法名 square， 参数 double.class),参数一定要传，可能会有同名参数不同的方法
         Method square=reflectMethod.class.getMethod("square",double.class);
         Method printTable=reflectMethod.class.getMethod("printTable",double.class);
 
@@ -33,6 +33,8 @@ public class reflectMethod {
 
         for (double x = from; x <= to; x += dx) {
             //调用当前的方法，对于静态方法，第一个参数会忽略，即可以设置为null
+            //通过反射调用方法比直接调用性能上慢得多
+            //更好的办法是使用接口及java8引入的lambda表达式
             double y = (double) f.invoke(null, x);
             System.out.print(String.format("%d,%d", x, y));
         }
