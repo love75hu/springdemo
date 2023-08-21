@@ -4,12 +4,17 @@ import cn.mediinfo.springdemo.response.MsfResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Spel有三个核心接口
@@ -23,6 +28,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SimpleSpELController {
 
+    int one=1;
+    long two=2L;
+    float three=3.11F;
+    double four=4.4D;
+
+    //获取今年的总天数
+    int days= LocalDate.now().lengthOfYear();
+    ArrayList<String> list=new ArrayList<>();
+
+    private static final Logger logger= LoggerFactory.getLogger(SimpleSpELController.class);
+
 
     private final cn.mediinfo.springdemo.service.ClientScopeService ClientScopeService;
 
@@ -32,6 +48,7 @@ public class SimpleSpELController {
     @RequestMapping
     public MsfResponse HelloWord()
     {
+        logger.error("用户输入参数{0}，异常消息{1}","参数1","异常消息");
         Expression exp= parser.parseExpression("hello word");
         return MsfResponse.success(exp.getValue());
     }
