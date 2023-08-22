@@ -13,12 +13,12 @@ import java.nio.charset.StandardCharsets;
 /**
  * java 反射的使用
  */
-public class reflect {
+public class reflectSimple {
     /**
      * 反射获取类名
      */
     public void getNames() throws NoSuchMethodException {
-        reflect.class.getName();
+        reflectSimple.class.getName();
 
     }
 
@@ -35,9 +35,9 @@ public class reflect {
      * 根据className返回一个Class对象
      */
     public void getClassForClassName() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Class<?> classs = Class.forName(reflect.class.getName());
-        var Instance = (reflect) classs.getConstructor().newInstance();
-        if (Instance instanceof reflect && Instance != null) {
+        Class<?> classs = Class.forName(reflectSimple.class.getName());
+        var Instance = (reflectSimple) classs.getConstructor().newInstance();
+        if (Instance instanceof reflectSimple && Instance != null) {
             Instance.getClassForClassName();
         }
     }
@@ -46,7 +46,7 @@ public class reflect {
      * 通过反射获取reflect.class同目录下的文件资源，当然这个路径也可以改变为其他的
      */
     public void getResource() throws IOException {
-        Class cl = reflect.class;
+        Class cl = reflectSimple.class;
         var url = cl.getResource("a.gif");
         var icon = new ImageIcon(url);
 

@@ -6,11 +6,11 @@ import java.lang.reflect.Method;
 /**
  * 演示通过反射获取方法并进行调用的示例
  */
-public class reflectMethod {
-    public reflectMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+public class reflectMethodSimple {
+    public reflectMethodSimple() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //方法名 square， 参数 double.class),参数一定要传，可能会有同名参数不同的方法
-        Method square=reflectMethod.class.getMethod("square",double.class);
-        Method printTable=reflectMethod.class.getMethod("printTable",double.class);
+        Method square= reflectMethodSimple.class.getMethod("square",double.class);
+        Method printTable= reflectMethodSimple.class.getMethod("printTable",double.class);
 
         printTable(1,10,10,square);
         printTable(1,10,10,printTable);

@@ -8,7 +8,7 @@ import java.util.HashSet;
 /**
  * java 基础一些推荐写法
  */
-public class java {
+public class javaSimple {
 
     /**
      * 字符串构建高效写法
