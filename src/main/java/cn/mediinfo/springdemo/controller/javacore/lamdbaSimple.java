@@ -21,7 +21,6 @@ import java.util.function.*;
  *
  * Predicate:表示一个断言，它接受一个参数并返回一个布尔值。常用于过滤、筛选等场景。
  * BiPredicate:它表示接受两个输入参数并返回一个布尔值的操作。(使用比较少，一般一个参数里面是一个对象就行了)
- * 基本类型的函数式接口
  */
 public class lamdbaSimple {
     public static Supplier<List<String>> getInventorySupplier() {
