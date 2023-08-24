@@ -75,7 +75,54 @@ public class CompletableFutureSimple {
      * 组合两个CompletableFuture
      * 使用 thenCompose()组合两个独立的future 假设你想从一个远程API中获取一个用户的详细信息，一旦用户信息可用，你想从另外一个服务中获取他的贷方。
      */
-    public void CompletableFutureExample4(){
+    public void CompletableFutureExample4() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> "Hello");
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "World");
+
+        //通过调用 thenCombine() 方法，将这两个 CompletableFuture 组合在一起，在它们都完成时执行一个 BiFunction 函数来处理它们的结果。
+        CompletableFuture<String> combinedFuture = future1.thenCombine(future2, (result1, result2) ->
+                result1 + " " + result2);
+
+        String result = combinedFuture.get();
+        System.out.println(result);  // 输出 "Hello World"
+
+    }
+
+    /**
+     * 组合多个CompletableFuture
+     * exceptionally:该方法允许你在异步操作中发生异常时提供一个默认的返回值或处理方式。
+     * handle:该方法允许你在异步操作完成后处理结果，包括正常结果和异常情况(如果异常发生，res参数将是 null，否则，ex将是 null。)
+     */
+    public void CompletableFutureExample5() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> "Hello").exceptionally(ex->{return "默认值";});
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> 5).handle((value,ex)->{
+            //如果异常发生，res参数将是 null，否则，ex将是 null。
+            if (ex!=null)
+            {
+                //发生异常，执行异常逻辑
+            } else if (value!=null) {
+                //未发生异常，对返回值做二次加工
+            }
+            return value;
+        });
+        CompletableFuture<Boolean> future3 = CompletableFuture.supplyAsync(() -> true);
+
+        //我们使用 CompletableFuture.allOf() 方法将所有的 CompletableFuture 对象组合到一个新的 CompletableFuture 中。然后，使用 thenApply() 方法来处理所有 CompletableFuture 的结果。
+        //使用exceptionally处理回调异常
+        CompletableFuture<Void> allFutures = CompletableFuture
+                .allOf(future1, future2, future3)
+                .exceptionally(ex->{
+                    // exceptionally()回调给你一个从原始Future中生成的错误恢复的机会。你可以在这里记录这个异常并返回一个默认值。
+                    System.out.println(ex.getMessage());
+                    return null;
+                });
+
+        CompletableFuture<String> resultFuture = allFutures.thenApply(v ->
+                future1.join() + future2.join() + future3.join()
+        );
+
+        String result = resultFuture.get();
+        System.out.println(result);
 
     }
 }
