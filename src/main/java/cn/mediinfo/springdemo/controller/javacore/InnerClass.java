@@ -70,12 +70,18 @@ class People
      */
     public void Method()
     {
+        //1.和传统new Class()的区别是，我们没有定义接口的实现类，他会默认生成一个类，类名可能是：PeopleService$1 ,我们可以通过Object.getClass()查看生成的类名
+        //2.直接new Interface()可以减少代码量，编写代码更加灵活
+        //3.我们可以把接口当作参数在方法传递，lamdba的函数接口也是如此
         var china= new IPeopleService() {
             @Override
             public void getCountry() {
                 System.out.println("中国人");
             }
         };
+
+        //查看java默认生成的类名
+        //china.getClass();
 
         var American= new IPeopleService() {
             @Override
