@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 @RestController
 @Slf4j
-@RequestMapping({"api/v1/spel"})
+@RequestMapping({"api/v1/SimpleSpEL"})
 @RequiredArgsConstructor
 public class SimpleSpELController {
 
@@ -37,25 +37,22 @@ public class SimpleSpELController {
     int days= LocalDate.now().lengthOfYear();
     ArrayList<String> list=new ArrayList<>();
 
-    private static final Logger logger= LoggerFactory.getLogger(SimpleSpELController.class);
-
-
     private final cn.mediinfo.springdemo.service.ClientScopeService ClientScopeService;
 
     //ExpressionParser 是Spel的处理接口，默认实现类是SpelExpressionParser
     private org.springframework.expression.ExpressionParser parser= new SpelExpressionParser();
     @Operation(summary = "SpEL 初体验")
-    @RequestMapping
+    @RequestMapping("HelloWord")
     public MsfResponse HelloWord()
     {
-        logger.error("用户输入参数{0}，异常消息{1}","参数1","异常消息");
+        log.error("用户输入参数{0}，异常消息{1}","参数1","异常消息");
         Expression exp= parser.parseExpression("hello word");
         return MsfResponse.success(exp.getValue());
     }
 
     @Operation(summary = "SpEL 功能特性")
-    @RequestMapping
-    public MsfResponse FunctionAttribute()
+    @RequestMapping("FunctionAttribute2")
+    public MsfResponse FunctionAttribute2()
     {
         //Spel支持很多功能特性，比如调用方法、访问属性、调用构造函数等，模版引擎实现？
         //字符串拼接示例
@@ -71,7 +68,7 @@ public class SimpleSpELController {
     }
 
     @Operation(summary = "SpEL EvaluationContext")
-    @RequestMapping
+    @RequestMapping("EvaluationContext")
     public MsfResponse EvaluationContext()
     {
 

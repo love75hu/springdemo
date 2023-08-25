@@ -21,7 +21,7 @@ public interface SpELRepository extends JpaRepository<ClientscopeEntity,String> 
      * @param Id
      * @return
      */
-    @Query("select c from ClientscopeEntity c where c.scope=?1 and c.id = :Id or c.scope=?#{'22'}")
+    @Query("select c from ClientscopeEntity c where c.scope=?1 and c.id = ?2 or c.scope='22'")
     List<ClientscopeEntity> findByScopeaAndId(String scope,String Id);
 
     /**
@@ -38,6 +38,6 @@ public interface SpELRepository extends JpaRepository<ClientscopeEntity,String> 
      * 使用JPA约定的变量entityName获取当前实体名称
      * @return
      */
-    @Query("from #{# entityName}")
+    @Query(value = "select c from #{# entityName} c",nativeQuery = true)
     List<ClientscopeEntity> findAll();
 }
