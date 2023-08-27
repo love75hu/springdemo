@@ -32,3 +32,12 @@ void interrput()
 
 boolean isInterrupted()
 测试一个线程是否被中断。
+
+守护线程：
+Java中，通过Thread类，我们可以创建2种线程，分为守护线程和用户线程。
+守护线程是所有非守护线程的保姆，当所有非守护线程执行完成或退出了，即使还有守护线程在运行，JVM也会直接退出，因此守护线程通常是用来处理一些辅助工作。
+反之，对于非守护线程，只要有一个在运行，JVM就不会退出。
+典型的守护线程如垃圾回收GC线程，当用户线程都结束后，GC也就没有单独存在的必要，JVM直接退出。
+
+java.lang.Thread
+void setDaemon(boolean isDaemon)
