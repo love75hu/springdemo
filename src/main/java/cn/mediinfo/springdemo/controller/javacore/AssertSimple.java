@@ -37,7 +37,7 @@ public class AssertSimple {
     }
 
     /**
-     * pringBoot 中提供了 Assert 断言工具类，通常用于数据合法性检查
+     * springBoot 中提供了 Assert 断言工具类，通常用于数据合法性检查
      *
      * @param param
      */
