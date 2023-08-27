@@ -54,6 +54,7 @@ public class lamdbaSimple {
         //通过创建一个新的线程来执行
         Thread thread1 = new Thread(run);
         thread1.start();
+        thread1.getState();
     }
 
     /**

@@ -1,0 +1,34 @@
+线程的各种属性：包括：中断的状态、守护线程、未捕获异常的处理器，及不应使用的一些遗留特性。
+
+中断线程：
+当一个线程的run方法返回时（执行了方法体中最后一条语句，执行return语句返回），或者如果出现方法中未补获的异常，这个线程将终止。
+还有一个废弃的stop方法也可以终止线程，出此没有办法强制一个终止。不过，interrupt方法可以用来请求终止一个线程。
+
+当一个线程调用interrupt方法时候，就会设置这个线程的中断状态（interrupted status）。这是每个线程都会有的boolean标志。
+每个线程都应该不时检查这个标志，以判断线程是否被中断。
+
+要确定线程是否设置了中断状态，首先调用静态方法Thread.currentThread或得当前线程，然后调用isInterrupted方法。
+while (!Thread.currentThread().isInterrupted()){
+          //如果线程没有设置中断状态
+       }
+
+但是，当一个线程被阻塞，就无法检查中断状态。如果线程被阻塞，就无法检测中断状态，在一个被sleep或者wait调用阻塞的线程数调用interrupt，
+会被InterruptedException异常中断。
+         try{
+             //如果线程被阻塞，就无法检测中断状态，在一个被sleep或者wait调用阻塞的线程数调用interrupt，会被InterruptedException异常中断
+             Thread.sleep(50);
+             //检测线程是否设置了中断状态
+             while (!Thread.currentThread().isInterrupted()){
+                 //如果线程没有设置中断状态
+             }
+         }
+         catch (InterruptedException exception){
+               System.out.println("线程中断异常："+exception);
+         }
+
+java.lang.Thread
+void interrput()
+向线程发送中断请求，线程中断状态被设置为true,但一个线程如果被sleep调用阻塞，则抛出InterruptedException异常
+
+boolean isInterrupted()
+测试一个线程是否被中断。
