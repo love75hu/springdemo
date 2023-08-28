@@ -41,3 +41,33 @@ Java中，通过Thread类，我们可以创建2种线程，分为守护线程和
 
 java.lang.Thread
 void setDaemon(boolean isDaemon)
+
+
+未捕获异常处理器：
+线程的run方法不能抛出任何检查异常，但是非检查异常会导致线程终止，在终止之前，会将异常传递到一个用于处理未捕获异常的处理器UncaughtExceptionHandler
+
+java.lang.Thread
+void setUncaughtExceptionHandler(UncaughtExceptionHandler eh)
+
+线程优先级：
+在java语言程序中，每个线程都有一个优先级，java 中的线程优先级的范围是1～10，默认的优先级是5。“高优先级线程”会优先于“低优先级线程”执行。
+不同平台的优先级实现不同：
+windows；windows7个优先级别
+linux:面向linux的Oracle JVM会完全忽略优先级，所有的线程优先级都一样
+在早期没有操作系统的线程中，线程优先级有用，现在不需要使用了。
+
+java.lang.Thread
+void setPriority(int newPriority)
+
+
+线程同步：
+建议直接看博客：https://www.cnblogs.com/mikechenshare/p/16736772.html
+当使用多个线程来访问同一个数据时，将会导致数据不准确，相互之间产生冲突，非常容易出现线程安全问题,比如多个线程都在操作同一数据，都打算修改商品库存，这样就会导致数据不一致的问题。
+线程同步的真实意思，其实是“排队”：几个线程之间要排队，一个一个对共享资源进行操作，而不是同时进行操作。
+所以我们用同步机制来解决这些问题，加入同步锁以避免在该线程没有完成操作之前，被其他线程的调用，从而保证了该变量的唯一性和准确性。
+线程同步常用的四种方式：
+synchronized ：这种方式比较灵活,修饰一个方法或代码块，被修饰的代码块称为同步语句块。
+ReentrantLock：ReentrantLock类是可重入、互斥、实现了Lock接口的锁，它与使用synchronized方法具有相同的基本行为和语义，并且扩展了其能力。
+使用原子变量实现线程同步：为了完成线程同步，我们将使用原子变量(Atomic***开头的)来实现。
+ThreadLocal：实现线程同步，如果使用ThreadLocal管理变量，则每一个使用该变量的线程都获得该变量的副本，副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响，从而实现线程同步。
+
