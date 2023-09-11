@@ -19,7 +19,7 @@ public class QuartzTaskConfiguration {
     public JobDetail quartzTaskForJobDetailBean() {
         return JobBuilder
                 .newJob(QuartzTask.class)
-                .withIdentity("quartz-Task") //作业名称，不设置则随机生成
+                .withIdentity("quartz-Task","quartz-group") //作业名称&组，不设置则随机生成
                 .withDescription("quartz job作业示例")
                 .storeDurably() //是否保持存储状态，默认false
                 .build();

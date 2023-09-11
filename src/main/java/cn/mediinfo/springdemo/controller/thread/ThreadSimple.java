@@ -1,6 +1,7 @@
 package cn.mediinfo.springdemo.controller.thread;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -101,20 +102,20 @@ public class ThreadSimple {
     }
 
     /**
-     * 线程同步方式一： ReentrantLock
+     * 线程同步方式二： ReentrantLock
      * ReentrantLock类是可重入、互斥、实现了Lock接口的锁，它与使用synchronized方法具有相同的基本行为和语义，并且扩展了其能力。
      * synchronized 与 Lock 的对比
-     *
+     * <p>
      * ReentrantLock是显示锁,手动开启和关闭锁，别忘记关闭锁；
-     *
+     * <p>
      * synchronized 是隐式锁，出了作用域自动释放;
-     *
+     * <p>
      * ReentrantLock只有代码块锁,synchronized 有代码块锁和方法锁;
-     *
+     * <p>
      * 使用 ReentrantLock锁，JVM 将花费较少的时间来调度线程，线程更好,并且具有更好的扩展性（提供更多的子类）;
-     *
+     * <p>
      * 优先使用顺序：
-     *
+     * <p>
      * ReentrantLock> synchronized 同步代码块> synchronized 同步方法
      */
     public void ReentrantLockExample() {
@@ -130,9 +131,9 @@ public class ThreadSimple {
     }
 
     /**
-     * 使用原子变量实现线程同步
+     * 线程同步方式三：使用原子变量实现线程同步
      * 为了完成线程同步，我们将使用原子变量(Atomic***开头的)来实现。
-     *
+     * <p>
      * 比如典型代表：AtomicInteger类存在于java.util.concurrent.atomic中,该类表示支持原子操作的整数，采用getAndIncrement方法以原子方法将当前的值递加。
      */
     public void AtomicIntegerExample() {
@@ -141,7 +142,7 @@ public class ThreadSimple {
             public void run() {
                 System.out.println("执行线程任务！");
                 //执行加锁的具体业务逻辑
-                AtomicIntegerThread  r = new AtomicIntegerThread();
+                AtomicIntegerThread r = new AtomicIntegerThread();
                 r.save(100);
             }
         });
@@ -149,7 +150,7 @@ public class ThreadSimple {
 
 
     /**
-     * 使用 ThreadLocal实现线程同步
+     * 线程同步方式四：使用 ThreadLocal实现线程同步
      * 如果使用ThreadLocal管理变量，则每一个使用该变量的线程都获得该变量的副本，副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响，从而实现线程同步。
      */
     public void ThreadLocalExample() {
@@ -158,7 +159,7 @@ public class ThreadSimple {
             public void run() {
                 System.out.println("执行线程任务！");
                 //执行加锁的具体业务逻辑
-                ThreadLocalThread  r = new ThreadLocalThread();
+                ThreadLocalThread r = new ThreadLocalThread();
                 r.save(100);
             }
         });
@@ -169,16 +170,18 @@ public class ThreadSimple {
 class ThreadLocalThread {
     //创建一个本地线程变量
     ThreadLocal<Integer> t = new ThreadLocal<Integer>();
-        public void save(int money) {
-            //将值存入本地线程变量
-            t.set(money);
-            System.out.println("保存金额：" + money);
-        }
+
+    public void save(int money) {
+        //将值存入本地线程变量
+        t.set(money);
+        System.out.println("保存金额：" + money);
+    }
 }
 
 class AtomicIntegerThread {
     //声明一个原子变量
     private AtomicInteger account = new AtomicInteger(100);
+
     public void save(int money) {
         //利用原子变量设置值
         account.addAndGet(money);
@@ -189,13 +192,32 @@ class AtomicIntegerThread {
 class ReentrantLockThread {
     //需要声明这个锁
     private Lock lock = new ReentrantLock();
+    //创建一个此Lock实例的新Condition实例
+    Condition condition = lock.newCondition();
+    private boolean conditionMet = false;
 
     public void save(int money) {
         lock.lock();
         try {
+            while (!conditionMet) {
+                condition.await();  // 线程等待条件满足（ 使当前线程等待，直到发出信号或 中断。）
+            }
+            //条件满足后执行操作
             System.out.println("保存金额：" + money);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
             //释放锁
+            lock.unlock();
+        }
+    }
+
+    public void setCondition() {
+        lock.lock();
+        try {
+            conditionMet = true;
+            condition.signal();  //通知等待的线程可以唤醒
+        } finally {
             lock.unlock();
         }
     }

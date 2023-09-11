@@ -67,7 +67,13 @@ void setPriority(int newPriority)
 所以我们用同步机制来解决这些问题，加入同步锁以避免在该线程没有完成操作之前，被其他线程的调用，从而保证了该变量的唯一性和准确性。
 线程同步常用的四种方式：
 synchronized ：这种方式比较灵活,修饰一个方法或代码块，被修饰的代码块称为同步语句块。
+
 ReentrantLock：ReentrantLock类是可重入、互斥、实现了Lock接口的锁，它与使用synchronized方法具有相同的基本行为和语义，并且扩展了其能力。
+条件变量Condition：Condition是与ReentrantLock配合使用的，可以实现更精细的线程等待和通知机制。通过await()方法使线程等待条件满足，通过signal()或signalAll()方法通知等待的线程继续执行。
+java.util.concurrent.locks.Condition
+void await()   使当前线程等待，直到发出信号或 中断。
+void signal(); 唤醒一个线程
+
 使用原子变量实现线程同步：为了完成线程同步，我们将使用原子变量(Atomic***开头的)来实现。
 ThreadLocal：实现线程同步，如果使用ThreadLocal管理变量，则每一个使用该变量的线程都获得该变量的副本，副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响，从而实现线程同步。
 
