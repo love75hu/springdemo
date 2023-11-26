@@ -35,6 +35,8 @@ public class CollectionSimple {
      * 使用迭代器的好处是：可以做执行的集合进行数据操作，例如：remove
      */
     public void IteratorExample() {
+        List<String> list = Arrays.asList("a", "b", "c");
+
         ArrayList<String> arrayList = new ArrayList<>() {
             {
                 add("a");
