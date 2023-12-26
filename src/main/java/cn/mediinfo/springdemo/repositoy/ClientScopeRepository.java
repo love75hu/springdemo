@@ -3,7 +3,7 @@ package cn.mediinfo.springdemo.repositoy;
 
 import cn.mediinfo.springdemo.model.ClientscopeEntity;
 import cn.mediinfo.springdemo.orm.repositorie.SoftDeleteRepository;
-import io.lettuce.core.dynamic.annotation.Param;
+//import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.annotation.Nonnull;
 import org.apache.commons.lang.NotImplementedException;
 import org.springframework.data.domain.Example;
@@ -19,15 +19,15 @@ import java.util.Optional;
 
 
 public interface ClientScopeRepository extends SoftDeleteRepository<ClientscopeEntity, String> {
-    /**
-     * JPQL语法查询
-     *
-     * @param id
-     * @return
-     */
-    @Transactional(timeout = 10)
-    @Query(value = "select c.id from ClientscopeEntity as c where c.id = :id", nativeQuery = false)
-    List<String> findAllById(@Param("id") String id);
+//    /**
+//     * JPQL语法查询
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @Transactional(timeout = 10)
+//    @Query(value = "select c.id from ClientscopeEntity as c where c.id = :id", nativeQuery = false)
+//    List<String> findAllById(@Param("id") String id);
 
     Optional<ClientscopeEntity> findById(String id);
 

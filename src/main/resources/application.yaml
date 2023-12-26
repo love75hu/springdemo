@@ -74,7 +74,7 @@ spring:
       name: root
       password: admin
   cache:
-    type: redis #指定需要使用的缓存组件
+    type: none #redis #指定需要使用的缓存组件
   task:
     #任务调度线程池
     scheduling:

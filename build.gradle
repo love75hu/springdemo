@@ -48,8 +48,8 @@ dependencies {
     implementation fileTree(dir:'libs',includes:['*jar'])
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    implementation 'org.springframework.session:spring-session-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//    implementation 'org.springframework.session:spring-session-data-redis'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     implementation 'com.alibaba:druid-spring-boot-starter:1.2.8' //阿里巴巴开源连接池durid
     implementation 'org.springframework.boot:spring-boot-starter-aop'

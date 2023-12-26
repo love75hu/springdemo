@@ -115,4 +115,27 @@ public class CollectionSimple {
         }
         return largest;
     }
+
+    /**
+     * @description set集合遍历
+     * @author thj
+     * @throws  * @return String 
+     * @time 2023/12/22 14:31
+     */
+    public String toString() {
+        Set<Map.Entry<String, Object>> entrySet=new HashSet<>();
+        Iterator<Map.Entry<String, Object>> entries = entrySet.iterator();
+        StringBuilder sb = new StringBuilder("{");
+        while (entries.hasNext()) {
+            Map.Entry<String, Object> entry = entries.next();
+            sb.append(entry.getKey());
+            sb.append('=');
+            sb.append(entry.getValue().toString());
+            if (entries.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        sb.append('}');
+        return sb.toString();
+    }
 }
