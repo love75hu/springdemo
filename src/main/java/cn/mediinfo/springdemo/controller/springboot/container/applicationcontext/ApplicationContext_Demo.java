@@ -1,5 +1,6 @@
 package cn.mediinfo.springdemo.controller.springboot.container.applicationcontext;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -99,15 +100,17 @@ public class ApplicationContext_Demo {
       */
 
     /**
-     *  ApplicationContext 实现类 AnnotationConfigWebApplicationContext
-     *  AnnotationConfigWebApplicationContext 是 spring framework  中最常用的注解IOC驱动容器，它本身继承自 GenericApplicationContext ，那么它自然只能刷新一次。
-     *  AnnotationConfigWebApplicationContext 是一个独立的注解驱动的 ApplicationContext ，它接受组件类作为输入，它更重视 @Configuration 注解的类。还可以使用普通容器 @Component 注解的类和符合 JSR-330规范的类。
-     *  AnnotationConfigWebApplicationContext 允许使用 register(Class ...)方法直接传入指定的配置类，以及使用scan（String ...）方法进行类路径的包扫描。如果有多个 @Configuration 类，则在后面的 @Bean 将覆盖先前类中定义的方法。这个可以通过额外的 @Configuration  故意覆盖某些 BeanDefinition
+     *  ApplicationContext 实现类 AnnotationConfigApplicationContext
+     *  AnnotationConfigApplicationContext 是 spring framework  中最常用的注解IOC驱动容器，它本身继承自 GenericApplicationContext ，那么它自然只能刷新一次。
+     *  AnnotationConfigApplicationContext 是一个独立的注解驱动的 ApplicationContext ，它接受组件类作为输入，它更重视 @Configuration 注解的类。还可以使用普通容器 @Component 注解的类和符合 JSR-330规范的类。
+     *  AnnotationConfigApplicationContext 允许使用 register(Class ...)方法直接传入指定的配置类，以及使用scan（String ...）方法进行类路径的包扫描。如果有多个 @Configuration 类，则在后面的 @Bean 将覆盖先前类中定义的方法。这个可以通过额外的 @Configuration  故意覆盖某些 BeanDefinition
      */
 
     /**
      *  ApplicationContext 实现类 AbstractRefreshableApplicationContext
      *  AbstractRefreshableApplicationContext 是 基于XML配置驱动的IOC容器，优点是可以重复刷新，目前 spring boot已经不再使用，仅做了解。
      */
+
+
 
 }

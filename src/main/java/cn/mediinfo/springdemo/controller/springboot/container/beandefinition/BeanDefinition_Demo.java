@@ -1,5 +1,10 @@
 package cn.mediinfo.springdemo.controller.springboot.container.beandefinition;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Component;
+
 /*
  *@title BeanDefinition_Demo
  *@description
@@ -56,6 +61,52 @@ public class BeanDefinition_Demo {
      *      5、volatile Boolean isFactoryBean; 是否是FactoryBean bean
      *      6、volatile ResolvableType factoryMethodReturnType; bean方法的返回类型
      *      7、volatile Method factoryMethodToIntrospect; 工厂bean对应的方法引用
+     */
+
+
+    //1、基于组件扫描的 BeanDefinition
+    @Component
+    public class person{
+
+    }
+
+    void getBeanDefinition(){
+        //1、获取基于组件扫描的 BeanDefinition
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext("cn.mediinfo.springdemo.controller.springboot.container.beandefinition");
+        var bean=context.getBean(person.class);
+        var bean2=context.getBeanDefinition("person");
+    }
+
+    //2、基于 @Bean 的 BeanDefinition
+    @Configuration
+    public class BeanDefinitionConfiguration{
+
+        @Bean
+        public  person person(){
+            return new person();
+        }
+    }
+
+    void getBeanDefinition2(){
+        //2、获取基于 @Bean 的 BeanDefinition
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(BeanDefinitionConfiguration.class);
+        var bean=context.getBean(person.class);
+        var bean2=context.getBeanDefinition("person");
+    }
+
+    /**
+     * 基于组件扫描和基于 @Bean 的 BeanDefinition 有很大的区别，具体区别如下：
+     * 1、BeanDefinition 的类型是 root bean（ConfigurationClassBeanDefinition 继承 RootBeanDefinition）
+     * 2、bean 对象的 className不见了
+     * 3、自动注入模式为 AUTOWIRE_CONSTRUCTOR(构造方法注入)
+     * 4、有 factoryBean属性 ：person 由  BeanDefinitionConfiguration 的 person方法创建
+     *
+     * 两种bean定义放实际运行时候为什么会有这么大的差别呢？
+     * 1、通过注解+组件扫描方式构造的 BeanDefinition ，它的扫描工具是 ClassPathBeanDefinitionScanner,扫描器会扫描指定包路径下包含特定模式注解的类，核心工作方法是doScan。
+     * 它会调用父类 ClassPathScanningCandidateComponentProvider 的 findCandidateComponents方法，创建 scanCandidateComponents 并返回。
+     *
+     * 2、通过配置类=@Bean 式构造的 BeanDefinition ，它最复杂，它涉及配置类的解析。配置类的解析要追踪到 ConfigurationClassPostProcessor 的 processConfigBeanDefinitions 方法，该方法会处理配置类。
+     * 并交给 ConfigurationClassParser 类解析配置类，提取所有标注 @Bean 的方法。随后这些方法又被 ConfigurationClassBeanDefinitionReader 解析，最终在底层创建 ConfigurationClassBeanDefinition并返回。
      */
 
 

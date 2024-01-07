@@ -1,5 +1,6 @@
 package cn.mediinfo.springdemo.controller.springboot.container.beanfactory;
 
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 
 /*
@@ -20,6 +21,4 @@ public class AutowireCapableBeanFactory_Demo {
      *
      * 总结： AutowireCapableBeanFactory API一般不需要我们操作，因为正常项目不会使用。
      */
-
-
 }
