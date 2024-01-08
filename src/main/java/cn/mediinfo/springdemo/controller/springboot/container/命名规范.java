@@ -20,5 +20,9 @@ public class 命名规范 {
      *  Mutable** 开头通常是一个List组合封装，例如:MutablePropertySources
      *  Configurable** 配置类
      *  invoke** 调用** 例如:invokeMethod()
+     *  **Handler **处理策略，例如:AuthenticationSuccessHandler
+     *  after**   之后处理，例如:afterPropertiesSet()
+     *  before**  之前处理
+     *  additional** 附加处理，例如:additionalAuthenticationChecks
      */
 }
