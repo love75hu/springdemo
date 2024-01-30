@@ -301,7 +301,7 @@ public class 脚本编译与注解处理1_脚本编译 {
 
         //使用类加载器调用 Class.forName() 方法来加载类：
         ByteArrayClassLoader classLoader=new ByteArrayClassLoader(classes);
-        Class<?> testClass=Class.forName("className", true, classLoader);
+       // Class<?> testClass=Class.forName("className", true, classLoader);
     }
 
     interface Greeter {
@@ -352,14 +352,14 @@ public class 脚本编译与注解处理1_脚本编译 {
             this.classes = classes;
         }
 
-        public Class<?> findClass(String name) throws ClassNotFoundException {
-            for (ByteArrayClass clazz : classes) {
-                if (clazz.getName().equals(name)) {
-                    byte[] bytes = clazz.getBytes();
-                    return defineClass(name, bytes, 0, bytes.length);
-                }
-            }
-            throw new ClassNotFoundException(name);
-        }
+//        public Class<?> findClass(String name) throws ClassNotFoundException {
+//            for (ByteArrayClass clazz : classes) {
+//                if (clazz.getName().equals(name)) {
+//                    byte[] bytes = clazz.getBytes();
+//                    return defineClass(name, bytes, 0, bytes.length);
+//                }
+//            }
+//            throw new ClassNotFoundException(name);
+//        }
     }
 }
