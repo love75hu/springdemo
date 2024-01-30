@@ -1,4 +1,4 @@
-package cn.mediinfo.springdemo.controller.springboot.container;
+package cn.mediinfo.springdemo.controller.springboot;
 
 /*
  *@title 命名规范
