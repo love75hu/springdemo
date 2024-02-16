@@ -164,6 +164,7 @@ public class StreamExample {
         stringStream.map(Optional::ofNullable).forEach(System.out::println);// 将Optional对象转换为流,如果Optional对象为空，则会生成一个空流。
         Stream<String> stringOptional= stringStream.flatMap(s->Optional.of(s).stream());// 将Optional对象转换为流
         Stream<Optional<String>> stringOptional2= stringStream.map(Optional::of);// 将Optional对象转换为流
+
     }
 
     /**
